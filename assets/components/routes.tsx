@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter,Routes,Route,Navigate} from "react-router-dom";
-import TestComponent from './testComponent';
+import {SwiperData}from './swiperData';
 
 
 export default function(){
@@ -9,7 +9,7 @@ export default function(){
         <BrowserRouter>
         <Routes>
         <Route path="/" element={<p>main page</p>}/>
-        <Route path="/test" element={<TestComponent/>}/>
+        <Route path="/test" element={<SwiperData/>}/>
         </Routes>
         </BrowserRouter>
     )
