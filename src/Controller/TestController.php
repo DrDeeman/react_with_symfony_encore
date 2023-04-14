@@ -17,8 +17,10 @@ class TestController extends AbstractController{
 #[Route(path:'/test_api', methods:['GET'])]
     public function test(Connection $conn){
 
-        return new JsonResponse(
-            $conn->fetchAllAssociative("SELECT id,name,description, encode(logo, 'base64') AS logo FROM media")
+        return new JsonResponse([
+            'films'=>$conn->fetchAllAssociative("SELECT id,name, genre, ROUND(raiting,1) AS raiting, encode(logo, 'base64') AS logo FROM films ORDER BY datetime_added, raiting DESC"),
+            'serials'=>$conn->fetchAllAssociative("SELECT id,name, genre, ROUND(raiting,1) AS raiting, encode(logo, 'base64') AS logo FROM serials ORDER BY datetime_added, raiting DESC")
+        ]
         );
     }
 }

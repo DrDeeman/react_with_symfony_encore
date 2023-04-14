@@ -1,28 +1,38 @@
 import React,{useState,useEffect} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import {LogoMedia} from './logos';
+import {Logo, Media} from '../types/media';
 import 'swiper/css';
+import 'swiper/css/navigation';
 
-type Logo = {
-  id:Number,
-  name:String,
-  logo:String
-}
 export const SwiperData = function(){
 
-    const [state,setState] = useState<Array<Logo>>([]);
+    const [state,setState] = useState({});
 
     useEffect(()=>{
-       fetch('/test_api').then(response=>response.json()).then(result=>setState(result));
+        fetch('/test_api').then(response=>response.json()).then(result=>setState(result));
     },[]);
 
+  
     return (
         <React.Fragment>
-      <Swiper>     
-         {state.map((logo,i)=><SwiperSlide key={i}>
+          {Object.keys(state).map((key:string,ind)=>
+          <div className="wrapperSwiper" key={ind}>
+      <Swiper
+      modules={[Scrollbar]}
+       spaceBetween={5}
+       slidesPerView='auto'
+       scrollbar={{ draggable: true }}
+       onSwiper={(swiper) => console.log(swiper)}
+       onSlideChange={() => console.log('slide change')}
+       >     
+         {(state[key as keyof (Media | {})] as Media).map((logo:Logo,i:number)=><SwiperSlide key={i}>
            <LogoMedia data={logo}/>
          </SwiperSlide>)}
       </Swiper>
+      </div>
+          )}
       </React.Fragment>
     )
 }
