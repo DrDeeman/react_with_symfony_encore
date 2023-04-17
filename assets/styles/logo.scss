@@ -6,9 +6,7 @@
 .wrapperPoster{
 
     width:200px;
-    height:300px;
-    display:flex;
-    flex-direction:column;
+    height:320px;
 
 
     p,h3{
@@ -29,8 +27,27 @@
     background-size: cover;
     border:2px solid grey;
     border-radius:10px;
-     height:100%;
-     width:100%;
+    overflow:hidden;
+    height:100%;
+    width:100%;
+
+     img{
+     height:inherit;
+     width:inherit;
+     -webkit-transition: all 1s ease; /* Safari and Chrome */
+     -moz-transition: all 1s ease; /* Firefox */
+     -ms-transition: all 1s ease; /* IE 9 */
+     -o-transition: all 1s ease; /* Opera */
+     transition: all 1s ease;
+ 
+  &:hover{
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+  }
+}
 }
 
  .raiting{

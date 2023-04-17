@@ -20,12 +20,12 @@ class TestController extends AbstractController{
         $this->serializer = SerializeService::getSerializer();
     }
 
-    #[Route(path:['/','test'],methods:['GET'])]
+    #[Route(path:'/{reactRouting}', name:'main_page_route', requirements:['reactRouting'=>'^[^(api)](.*)?'], defaults:['reactRouting'=>null],methods:['GET'])]
     public function getPage(){
         return $this->render('index.html.twig');
 }   
 
-#[Route(path:'/test_api', methods:['GET'])]
+#[Route(path:'/api', methods:['GET'])]
     public function test(Connection $conn, EntityManagerInterface $emi){
         return new Response($this->serializer->serialize([
            'films'=>$emi->getRepository(Films::class)->findBy([],['datetime_added'=>'DESC','raiting'=>'DESC']),

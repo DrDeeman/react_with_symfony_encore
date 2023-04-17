@@ -35,6 +35,11 @@ class Serials
     #[ORM\Column(type: Types::SMALLINT)]
     private int $count_seazons = 1;
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getName(): ?string
     {
         return $this->name;

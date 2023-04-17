@@ -34,6 +34,11 @@ class Films
     #[ORM\Column]
     private int $duration = 0;
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getName(): ?string
     {
         return $this->name;

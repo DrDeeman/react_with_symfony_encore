@@ -11,7 +11,7 @@ export const SwiperData = function(){
     const [state,setState] = useState({});
 
     useEffect(()=>{
-        fetch('/test_api').then(response=>response.json()).then(result=>setState(result));
+        fetch('/api').then(response=>response.json()).then(result=>setState(result));
     },[]);
 
   
@@ -21,14 +21,14 @@ export const SwiperData = function(){
           <div className="wrapperSwiper" key={ind}>
       <Swiper
       modules={[Scrollbar]}
-       spaceBetween={5}
+       spaceBetween={10}
        slidesPerView='auto'
        scrollbar={{ draggable: true }}
        onSwiper={(swiper) => console.log(swiper)}
        onSlideChange={() => console.log('slide change')}
        >     
          {(state[key as keyof (Media | {})] as Media).map((logo:Logo,i:number)=><SwiperSlide key={i}>
-           <LogoMedia data={logo}/>
+           <LogoMedia type={key} data={logo}/>
          </SwiperSlide>)}
       </Swiper>
       </div>
