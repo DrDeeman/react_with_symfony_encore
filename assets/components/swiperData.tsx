@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import {LogoMedia} from './logos';
-import {Logo, Media} from '../types/media';
+import {Poster, Media} from '../types/media';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -11,7 +11,7 @@ export const SwiperData = function(){
     const [state,setState] = useState({});
 
     useEffect(()=>{
-        fetch('/api').then(response=>response.json()).then(result=>setState(result));
+        fetch('/api/getPosters').then(response=>response.json()).then(result=>setState(result));
     },[]);
 
   
@@ -27,7 +27,7 @@ export const SwiperData = function(){
        onSwiper={(swiper) => console.log(swiper)}
        onSlideChange={() => console.log('slide change')}
        >     
-         {(state[key as keyof (Media | {})] as Media).map((logo:Logo,i:number)=><SwiperSlide key={i}>
+         {(state[key as keyof (Media | {})] as Media).map((logo:Poster,i:number)=><SwiperSlide key={i}>
            <LogoMedia type={key} data={logo}/>
          </SwiperSlide>)}
       </Swiper>

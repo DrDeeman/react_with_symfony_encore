@@ -25,12 +25,19 @@ class TestController extends AbstractController{
         return $this->render('index.html.twig');
 }   
 
-#[Route(path:'/api', methods:['GET'])]
+#[Route(path:'/api/getPosters', methods:['GET'])]
     public function test(Connection $conn, EntityManagerInterface $emi){
         return new Response($this->serializer->serialize([
            'films'=>$emi->getRepository(Films::class)->findBy([],['datetime_added'=>'DESC','raiting'=>'DESC']),
            'serials'=>$emi->getRepository(Serials::class)->findBy([],['datetime_added'=>'DESC','raiting'=>'DESC'])
         ],'json'));
      
+    }
+
+    #[Route(path:'/api/getFilm/{id}', methods:['GET'])]
+    public function getFilm(Films $film){
+        return new Response(
+            $this->serializer->serialize($film,'json')
+        );
     }
 }

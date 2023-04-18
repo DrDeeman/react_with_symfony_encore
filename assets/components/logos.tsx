@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Logo} from '../types/media';
+import {Poster} from '../types/media';
 
-export const LogoMedia = function({type,data}:{type:string,data:Logo}){
+export const LogoMedia = function({type,data}:{type:string,data:Poster}){
 
     console.log(data);
 
