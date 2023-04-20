@@ -14,5 +14,7 @@ export interface Poster{
   export type Media={
     films:Array<Poster>,
     serials:Array<Poster>,
-    [index: string]:any
+    [index: string]:Array<Poster>
   }
+
+ 
