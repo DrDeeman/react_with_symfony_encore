@@ -1,7 +1,15 @@
 
+
+@keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+
+  
 .wrapperSwiper{
 
-    margin:0px 5px 15px;
+    margin:10px 5px 15px;
     
 .wrapperPoster{
 
@@ -39,6 +47,14 @@
      -ms-transition: all 1s ease; /* IE 9 */
      -o-transition: all 1s ease; /* Opera */
      transition: all 1s ease;
+
+     &.preload{
+        background: #eee;
+        background: linear-gradient(110deg, #f0ecec 8%, #f0e3e3 18%, #1f1a1a 33%);
+        border-radius: 5px;
+        background-size: 200% 100%;
+        animation: 1.5s shine linear infinite;
+     }
  
   &:hover{
     -webkit-transform:scale(1.25); /* Safari and Chrome */

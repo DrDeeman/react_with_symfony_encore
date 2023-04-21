@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{Suspense} from 'react';
 import {BrowserRouter,Routes,Route,Navigate} from "react-router-dom";
 import {SwiperData}from './swiperData';
 import {Film} from './Film';
-import {Serial} from './Serial';
+import {Loader} from './loader';
 
 
 export default function(){
@@ -11,8 +11,8 @@ export default function(){
         <BrowserRouter>
         <Routes>
         <Route path="/" element={<SwiperData/>}/>
-        <Route path="/films/:id" element={<Film/>}/>
-        <Route path="/serials/:id" element={<Serial/>}/>
+        <Route path="/films/:id" element={<Film type="film"/>}/>
+        <Route path="/serials/:id" element={<Film type="serial"/>}/>
         </Routes>
         </BrowserRouter>
     )

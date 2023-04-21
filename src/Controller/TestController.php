@@ -40,4 +40,13 @@ class TestController extends AbstractController{
             $this->serializer->serialize($film,'json')
         );
     }
+
+    #[Route(path:'/api/getSerial/{id}', methods:['GET'])]
+    public function getSerial(Serials $serial){
+        return new Response(
+            $this->serializer->serialize($serial,'json')
+        );
+    }
+
+
 }

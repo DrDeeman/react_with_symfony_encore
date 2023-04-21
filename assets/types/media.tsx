@@ -10,6 +10,11 @@ export interface Poster{
     description:string,
     duration:number
   }
+
+  export interface TSerial extends Poster{
+    description:string,
+    countSeazons:number
+  }
   
   export type Media={
     films:Array<Poster>,

@@ -1,16 +1,17 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useMemo, useCallback} from 'react';
 import {useQuery} from 'react-query';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y,Lazy } from 'swiper';
 import {LogoMedia} from './logos';
 import {Poster, Media} from '../types/media';
+import {Loader} from './loader';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
 
 export const SwiperData = function(){
 
- 
+const [visibleLoader, setVisibleLoader] = useState(false);
 
 /*
   const [state,setState] = useState<Media | {}>({});
@@ -18,19 +19,29 @@ export const SwiperData = function(){
     useEffect(()=>{
         fetch('/api/getPosters').then(response=>response.json()).then(result=>setState(result));
     },[]);
-    */
+   */
     
-   
-    const {isLoading,error,data:state}= useQuery<Media,Error>(
+
+    const {isLoading,isFetching,error,data:state}= useQuery<Media,Error>(
       'posters',
-      ()=>fetch('/api/getPosters').then(response=>response.json())
-    )
-   
+      ()=>fetch('/api/getPosters').then(response=>response.json()),
+      {staleTime:Infinity}
+    );
   
+  
+
+
+useEffect(()=>{
+  setVisibleLoader(true);
+},[]);
+
+
     return (
-      <div>
-     
-      {state &&
+      <>
+    
+    {(!visibleLoader || isFetching) && <Loader/>}
+
+    {visibleLoader && state &&
         <React.Fragment>
           {Object.keys(state).map((key:string,ind)=>
           <div className="wrapperSwiper" key={ind}>
@@ -39,7 +50,6 @@ export const SwiperData = function(){
        spaceBetween={10}
        slidesPerView='auto'
        scrollbar={{ draggable: true }}
-       onSwiper={(swiper) => console.log(swiper)}
        onSlideChange={() => console.log('slide change')}
        >     
          {(state[key]).map((logo:Poster,i:number)=><SwiperSlide key={i}>
@@ -50,6 +60,7 @@ export const SwiperData = function(){
           )}
       </React.Fragment>
       }
-      </div>
+
+      </>
     )
 }
