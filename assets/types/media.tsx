@@ -3,7 +3,9 @@ export interface Poster{
     name:string,
     genre:string,
     raiting:number,
-    logo:string
+    logo:string,
+    preview?:string,
+    screenshots?:Array<string>
   }
 
   export interface TFilm extends Poster{

@@ -34,6 +34,7 @@ class Films
     #[ORM\Column]
     private int $duration = 0;
 
+
     public function getId(): int
     {
         return $this->id;
