@@ -9,6 +9,7 @@ import '../styles/pageFilm.scss';
 
 
 export const Film = function({type}:{type:string}){
+const [activeIndex,setActiveIndex] = useState(0);
 const [fullDescr, setFullDescr] = useState(false);
 const [visibleScreen, setVisibleScreen] = useState(0);
 const swiperRef = useRef() as any;
@@ -46,25 +47,25 @@ const screenshots = useMemo(()=>dataMedia?.screenshots?.map(
                <div className='wrapperScreenshots'>
                <Swiper
         modules={[Scrollbar, Navigation]}
-       spaceBetween={10}
        slidesPerView='auto'
-       onBeforeInit={(swiper) =>swiperRef.current = swiper}
+       //onBeforeInit={(swiper) =>swiperRef.current = swiper}
        navigation={{
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
         disabledClass: 'disable' // When the navigation button is not available, the Class is added, that is, when the Swiper index is 0, the last Class class name without prevel will add a disable, which is .swiper-button-prev .disable
       }}
        scrollbar={{ draggable: true }}
-       onSlideChange={() => console.log('slide change')}
+       onSlideChange={(e) =>setActiveIndex(e.activeIndex)}
        >     
          {dataMedia.screenshots?.map((url,i)=><SwiperSlide key={i} onClick={()=>setVisibleScreen(i)}>
-           <img src={url}/>
+           <img src={url} style={{paddingLeft:'5px', paddingRight:'5px'}}/>
          </SwiperSlide>
          )}
       </Swiper>
-      <div className="swiper-button-prev"/>
-          <div className="swiper-button-next"/>
-               </div>
+      <div className="swiper-button-prev" style={{display:(activeIndex>0?'block':'none')}}/>
+      <div className="swiper-button-next" style={{display:(screenshots?.length && activeIndex!=screenshots.length-5?'block':'none')}}/>
+       <div className="indicator">{screenshots?.map((img,i)=>i>=4?<span key={i} className={activeIndex==i-4?'_active':''}></span>:null)}</div>
+        </div>
 
                 </div> 
                 </div>

@@ -12,19 +12,23 @@ html,body{
 
     .swiper-button-prev,.swiper-button-next{
         position: absolute;
-        top: 25%;
-        width: 50px;
-        height: 50px;
+        top: 30%;
+        width: 25px;
+        height: 25px;
         background-color:white;
         border-radius:50%;
-       
+        padding-top:3px;
+
+        &::after{
+            font-size:15px !important;
+        }
       }
 
       .swiper-button-prev{
-        left:-25px;
+        left:-10px;
       }
       .swiper-button-next{
-        right:-25px;
+        right:-10px;
       }
 }
 
